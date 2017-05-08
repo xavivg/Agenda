@@ -1,0 +1,219 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 08-may-2017, 18:54:41
+    Author     : Brian
+*/
+body{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+.promo{
+    overflow-x: hidden;
+    background: #011222;
+    margin: 0px;
+}
+.start_descrition{
+    z-index: 1;
+    text-align: center;
+    position: absolute;
+    width: 1200px;
+    top: 50%;
+    margin-top: -260px;
+    left: 50%;
+    margin-left: -600px;
+}
+.start_descrition.option{
+    -webkit-animation-duration: 1s;
+    -webkit-animation-delay: 0.4s;
+    -webkit-animation-iteration-count: 1;
+}
+.start_logo h1{
+    font-weight: bold;
+}
+.start_descrition h1 span{
+    display: block;
+    width: 150px;
+    height: 1px;
+    background: #95c800;
+    margin: 40px auto;
+}
+.start_descrition span{
+    font-family: 'Roboto', sans-serif;
+    font-size: 23px;
+    font-weight: 300;
+    color: #ffffff;
+    line-height: 36px;
+}
+.start_descrition .btns{
+    margin-top: 60px;
+}
+.start_descrition .btns .green{
+    background: #95c800;
+    padding: 15px 35px;
+    border-radius: 3px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 16px;
+    color: #ffffff;
+    margin: 0 15px;
+}
+.start_descrition .btns .green:hover {
+    background: #ffffff;
+    padding: 15px 35px;
+    border-radius: 3px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 16px;
+    color: #95c800;
+    margin: 0 15px;
+}
+.start_descrition .btns .white_border{
+    background: none;
+    padding: 14px 35px;
+    border-radius: 3px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 16px;
+    color: #ffffff;
+    border: 2px solid;
+    margin: 0 15px;
+}
+.start_descrition .btns .white_border:hover {
+    background: none;
+    padding: 14px 35px;
+    border-radius: 3px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 16px;
+    color: #94C700;
+    border: 2px solid;
+    margin: 0 15px;
+}
+.fadeInDownBig{
+    -webkit-animation-name: fadeInDownBig;
+    animation-name: fadeInDownBig;
+}
+.animated{
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+a{
+    color: #97C900;
+    text-decoration: none;
+    transition: 0.3s;
+    background-color: transparent;
+}
+img{
+    vertical-align: middle;
+    border: 0;    
+}
+h1{
+    font-size: 50px;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+}
+.bg{
+    background: url(../img/bg.png);
+    background-position: center bottom;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    background-repeat: no-repeat;
+}
+/*FORM LOG IN*/
+.add_place{
+    position: fixed;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.83);
+    width: 100%;
+    height: 100%;
+    top: -1000px;
+    transition: 0.3s linear;
+}
+.login_form {
+    height: 400px;
+}
+.place_form {
+    width: 300px;
+    background: #ffffff;
+    border-radius: 4px;
+    margin: 0 auto;
+    top: 50%;
+    position: relative;
+    height: 480px;
+    margin-top: -265px;
+}
+.close_window {
+    display: block;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    color: #ffffff;
+    cursor: pointer;
+}
+.place_form h3 {
+    font-weight: 300;
+    text-align: center;
+    padding: 20px 0px;
+    display: block;
+}
+.place_form h3 span {
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: #95C800;
+    margin: 20px auto -16px auto;
+}
+.place_form label {
+    font-size: 11px;
+    text-transform: uppercase;
+    display: block;
+    padding: 0px 30px;
+    margin: 20px 0px 20px 0px;
+}
+.place_form label input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    border-radius: 3px;
+    border: 1px solid #DDDDDD;
+    margin-top: 10px;
+    background: #F9F9F9;
+    padding: 0px 20px;
+    font-size: 16px;
+    font-weight: 300;
+}
+.login_input{
+    margin: 10px 30px !important;
+    width: 240px !important;
+    border-radius: 3px !important;
+    padding: 10px !important;
+}
+.place_form a {
+    width: 100%;
+    margin: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    padding: 20px;
+    margin-top: 18px;
+}
+.btn-success:hover{
+    color: #fff;
+    background-color: #353535;
+    border-color: #398439;
+}
