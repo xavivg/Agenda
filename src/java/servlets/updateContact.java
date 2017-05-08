@@ -69,7 +69,10 @@ public class updateContact extends HttpServlet {
             Contactos contacto = new Contactos(id,name, surname, mail, tfijo, tmovil, direccion, currentObj);
            if(miEjb.updateContacto(contacto)){
                 out.println("<h3>La informacion de "+name+" ha sido actualizada correctamente</h3>");
-                out.println("<script>setTimeout(myFunction, 3000)</script>");
+                out.println("<form action='login' method='POST'>");
+                out.println("<input type='hidden' name='nombre' value='"+ current +"'>");
+                out.println("<input type='hidden' name='password' value='"+ pass +"'>");
+                out.println("<input type='submit' value='Entrar'>");
            }
             out.println("</body>");
             out.println("</html>");
