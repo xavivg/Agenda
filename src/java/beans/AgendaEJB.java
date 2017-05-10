@@ -15,58 +15,70 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import servlets.Contacto;
+
 /**
  *
  * @author xaviv
  */
 @Stateless
 public class AgendaEJB {
-    
-@PersistenceUnit
+
+    @PersistenceUnit
     EntityManagerFactory emf;
-   public Usuario existeUsuario(String nombre, String password){
+    
+     public Usuario getUser(String nick){
+        return (Usuario) emf.createEntityManager().
+                createNamedQuery("Usuario.findByNick").
+                setParameter("nick", nick).getSingleResult();
+    }
+
+    public Usuario existeUsuario(String nombre, String password) {
         EntityManager em = emf.createEntityManager();
         Usuario encontrado = em.find(Usuario.class, nombre);
-        if(encontrado.getPassword().equals(password)){
+        if (encontrado.getPassword().equals(password)) {
             return encontrado;
         }
         em.close();
         return null;
-   }
-   public boolean insertarContacto(Contactos c) {
-            EntityManager em = emf.createEntityManager();
-            Contactos contacto = em.find(Contactos.class, c.getId());
-            if(contacto == null){
+    }
+
+    public boolean insertarContacto(Contactos c) {
+        EntityManager em = emf.createEntityManager();
+        Contactos contacto = em.find(Contactos.class, c.getId());
+        if (contacto == null) {
             em.persist(c);
-            em.flush();  
+            em.flush();
             em.close();
             return true;
-            }
+        }
         return false;
     }
-    public Contactos existeContacto(int id, String nick){
+
+    public Contactos existeContacto(int id, String nick) {
         EntityManager em = emf.createEntityManager();
         Contactos encontrado = em.find(Contactos.class, id);
-        if(encontrado.getUsuarioNick().getNick().equals(nick)){
+        if (encontrado.getUsuarioNick().getNick().equals(nick)) {
             return encontrado;
         }
         em.close();
         return null;
-   }
-    public boolean deleteContacto(int id, String nick){
+    }
+
+    public boolean deleteContacto(int id, String nick) {
         EntityManager em = emf.createEntityManager();
         Contactos encontrado = em.find(Contactos.class, id);
-        if(encontrado.getUsuarioNick().getNick().equals(nick)){
-           em.remove(encontrado);
-           em.close();
-           return true;
+        if (encontrado.getUsuarioNick().getNick().equals(nick)) {
+            em.remove(encontrado);
+            em.close();
+            return true;
         }
         return false;
-   }
+    }
+
     public boolean updateContacto(Contactos c) {
         EntityManager em = emf.createEntityManager();
         Contactos contacto = em.find(Contactos.class, c.getId());
-         if(contacto != null){
+        if (contacto != null) {
             contacto.setNombre(c.getNombre());
             contacto.setApellidos(c.getApellidos());
             contacto.setMail(c.getMail());

@@ -4,13 +4,23 @@
  * and open the template in the editor.
  */
 
-$(function() {
-    $('#login').click(function(){
-        $('#autorized').animate({'top':'0px'},200);
+$(function () {
+    $('#login').click(function () {
+        $('#autorized').animate({'top': '0px'}, 200);
         return false;
     });
-    $('#closeau').click(function(){
-        $('#autorized').animate({'top':'-999px'},500);
+    $('#closeau').click(function () {
+        $('#autorized').animate({'top': '-999px'}, 500);
     });
- 
+    $('#addContact').click(function (){
+        $('#pl').animate({'top':'0'}, 200);
+        return false;
+    });
+    $('#close').click(function (){
+        $('#pl').animate({'top':'-150%'}, 500);
+        return false;
+    });
 });
+function changeClass(){
+    $("#pushy-left").toggleClass("pushy-open");
+};

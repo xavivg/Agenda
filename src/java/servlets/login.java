@@ -46,45 +46,88 @@ public class login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet login</title>");
-            out.println("<script src=\"https://code.jquery.com/jquery-3.2.1.min.js\"></script>");
+            out.println("<title>Mi Agenda APP</title>");
             out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">");
-            out.println("<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"></script>");
+            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">");
+            out.println("<link href=\"css/style.css\" rel=\"stylesheet\" type=\"text/css\"/>");
             out.println("<script>function getContact(obj)   {alert(\"hey \"+obj+\"!!\");  window.location = \"Contacto?id=\"+obj+\"\";}</script>");
             out.println("</head>");
             out.println("<body>");
             String phone = "";
             if (miEjb.existeUsuario(nombre, password) != null) {
-                out.println("<div class=\"row\">");
-                out.println("<div class=\"jumbotron text-center\">");
-                out.println("<h2>Agenda</h2>");
-                out.println("<h5>Java project created in STUCOM -2017-</h5>");
-                out.print("</div>");//JUMBOTRON
-                out.print("<div class=\"container\">");
-                out.print("<div class=\"row\">");
-                out.print("<div class=\"col-md-4\">");
-                out.print("<div class=\"row\">");
-                out.println("<h3 class=\"text-center\">Bienvenido " + nombre + "</h3>");
-                out.print("</div>");
-                out.print("<br />");
-                out.print("<div class=\"row text-center\">");
-                out.println("<button onclick=\"window.location.href='newContact'\" class=\"btn btn-lg btn-primary\">Añadir usuario </button>");
-                out.print("</div>");
-                out.print("</div>");//COL1->Bienvenido LEFT
-                out.print("<div class=\"col-md-offset-1 col-md-6\">");
                 Usuario current = miEjb.existeUsuario(nombre, password);
                 List<Contactos> contactosX = new ArrayList();
-                out.println("<h3 class=\"text-center\">Lista de contactos</h3>");
-                out.println("<div class=\"panel panel-default\">");
                 contactosX.addAll(current.getContactosCollection());
+                int s = contactosX.size();
+                out.println("<div class=\"menu-btn\" onclick=\"changeClass()\">☰</div>");
+                out.println("<nav class=\"pushy\" id=\"pushy-left\">");
+                out.println("<div class=\"profile\">");
+                out.println("<div class=\"avatar\">");
+                out.println("<img src=\"img/no-profile.jpg\" alt=\"\"/>");
+                out.println("<span>"+s+"</span>");
+                out.println("</div>");
+                out.println("<h3>");
+                out.println("<a href=\"#\">"+ nombre +"</a>");
+                out.println("</h3>");
+                out.println("<a class=\"log_btn\" href=\"index.html\">Log Out</a>");
+                out.println("</div>");                
+                out.println("</nav>");
+                out.println("<div class=\"add_place\" id=\"pl\">");
+                out.println("<div class=\"place_form\">");
+                out.println("<i class=\"fa fa-times close_window\" id=\"close\"></i>");
+                out.println("<h3>Nuevo Contacto<span></span></h3>");
+                out.println("<form action='newContact' method=\"POST\">");
+                out.println("<label>Nombre:<input type=\"text\" name=\"reg_name\"></label>");
+                out.println("<label>Apellido:<input type=\"text\" name=\"reg_surname\"></label>");
+                out.println("<label>Mail:<input type=\"text\" name=\"reg_mail\"></label>");
+                out.println("<label>Móvil:<input type=\"text\" name=\"reg_mobile\"></label>");
+                out.println("<label>Casa:<input type=\"text\" name=\"reg_house\"></label>");
+                out.println("<label>Dirección:<input type=\"text\" name=\"reg_location\"></label>  ");
+                out.println("<input type='hidden' name='reg_user' value='"+nombre+"'>");
+                out.println("<input type='hidden' name='reg_password' value='"+password+"'>");
+                out.println("<button type=\"submit\" class=\"green_btn_header\" id=\"add\">Añadir</button>");
+                out.println("</form>");
+                out.println("</div>");
+                out.println("</div>");
+                out.println("<div class=\"container contant\">");
+                out.println("<div class=\"row\">");
+                out.println("<div class=\"col-md-12 basic\">");
+                out.println("<div class=\"head\">");
+                out.println("<a href=\"index.html\" class=\"logo\"><h1>Mi Agenda</h1></a>");
+                out.println("<a href=\"#\" class=\"green_btn_header\" id=\"addContact\">");
+                out.println("<i class=\"fa fa-plus\"></i>");
+                out.println("</a>");
+                out.println("</div>");
+                out.println("<div class=\"contactos\">");
+                out.println("<h4>"+s+" contactos</h4>");
                 for (Contactos x : contactosX) {
                     if(x.getTmovil()== null){ phone = "none";} else{ phone = x.getTmovil(); }
-                    out.println("<h4 style=\"margin-left:10px\">" + x.getApellidos()+ ", "+x.getNombre()+" <a href=\"mailto:"+x.getMail()+"\">"+x.getMail()+"</a> "+phone+" <form style=\"display:none\" id=\"form"+x.getId()+"\" method=\"post\" action=\"Contacto\"><input name=\"current\" value=\""+current.getNick()+"\"/><input name=\"id\" value=\""+x.getId()+"\"/></form><button class=\"btn btn-default\" type=\"submit\" form=\"form"+x.getId()+"\" value=\"Submit\">Ver contacto</button></h4>");
+                out.println("<div class=\"contacto\">");
+                out.println("<div class=\"user\">");
+                out.println("<a class=\"user_avatars\" href=\"Contacto?id="+x.getId()+"&current="+current.getNick()+"\">");
+                out.println("<div class=\"user_go\">");
+                out.println("<i class=\"fa fa-link\"></i>");
+                out.println("</div>");
+                out.println("<img src=\"img/no-profile.jpg\" alt=\"\"/>");
+                out.println("</a>");
+                out.println("</div>");
+                out.println("<div class=\"info\">");
+                out.println("<div class=\"head_contact\">");
+                out.println("<a href=\"Contacto?id="+x.getId()+"&current="+current.getNick()+"\">"+x.getNombre()+" "+x.getApellidos()+"</a>");
+                out.println("<span>"+x.getTmovil()+"</span>");
+                out.println("</div>");
+                out.println("</div>");
+                out.println("</div>");
                 }
-                out.println("</div>");//PANEL-DEF->AGENDA
-                out.print("</div>");//COL2->AGENDA RIGHT
-                out.print("</div>");//CONTAINER
-                out.print("</div>");//ROW1
+                out.println("</div>");
+                out.println("<a class=\"more_btn\" href=\"#\">Mostras más</a>");
+                out.println("</div>");
+                out.println("</div>");
+                out.println("</div>");
+                out.println("<script src=\"https://code.jquery.com/jquery-3.2.1.min.js\"></script>");
+                out.println("<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"></script>");
+                out.println("<script src=\"js/custom.js\" type=\"text/javascript\"></script>");
+                
             } else {
                 out.println("<p>Error, no existe este usuario</p>");
             }

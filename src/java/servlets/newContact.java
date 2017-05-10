@@ -5,8 +5,12 @@
  */
 package servlets;
 
+import beans.AgendaEJB;
+import entities.Contactos;
+import entities.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author xaviv
+ * @author xaviv & Brian
  */
 public class newContact extends HttpServlet {
+
+    @EJB
+    AgendaEJB miEjb;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +42,56 @@ public class newContact extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet newContact</title>");            
+            out.println("<title>Mi Agenda App</title>");
+            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">");
+            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">");
+            out.println("<link href=\"css/custom.css\" rel=\"stylesheet\" type=\"text/css\"/>");
             out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet newContact at " + request.getContextPath() + "</h1>");
+            out.println("<body class=\"promo\">");
+
+            // Recogemos los datos del formulario
+            String name = request.getParameter("reg_name");
+            String surname = request.getParameter("reg_surname");
+            String mail = request.getParameter("reg_mail");
+            String mobile = request.getParameter("reg_mobile");
+            String house = request.getParameter("reg_house");
+            String location = request.getParameter("reg_location");
+            String nombre = request.getParameter("reg_user");
+            String password = request.getParameter("reg_password");
+
+            Usuario u = miEjb.getUser(nombre);
+            Contactos c = new Contactos(Integer.SIZE, name, surname, mail, house, mobile, location, u);
+            if (miEjb.insertarContacto(c)) {
+                out.println("<div class=\"start_descrition option animated fadeInDownBig\">");
+                out.println("<h1>CONTACTO AÑADIDO<span></span></h1>");
+                out.println("<span>" + name + " ha sido agregado a la lista de contactos de " + nombre + ".</span>");
+                out.println("<div class=\"btns\">");
+                out.println("<form action=\"login\" method=\"POST\">");
+                out.println("<input type=\"hidden\" name='nombre' value='" + nombre + "'>");
+                out.println("<input type=\"hidden\" name='password' value='" + password + "'>");
+                out.println("<button type=\"submit\" class=\"white_border\">ACEPTAR</button>");
+                out.println("</form>");
+                out.println("</div>");
+                out.println("</div>");
+                out.println("<div class=\"bg\"></div>");
+            } else {
+                out.println("<div class=\"start_descrition option animated fadeInDownBig\">");
+                out.println("<a href=\"#\" class=\"start_logo\"><h1>Error</h1></a>");
+                out.println("<h1>CONTACTO NO AÑADIDO<span></span></h1>");
+                out.println("<span>" + name + " no ha podido ser agregado a la lista de contactos de " + nombre + ".</span>");
+                out.println("<div class=\"btns\">");
+                out.println("<form action=\"login\" method=\"POST\">");
+                out.println("<input type=\"hidden\" name='nombre' value='" + nombre + "'>");
+                out.println("<input type=\"hidden\" name='password' value='" + password + "'>");
+                out.println("<button type=\"submit\" class=\"white_border\">ACEPTAR</button>");
+                out.println("</form>");
+                out.println("</div>");
+                out.println("</div>");
+                out.println("<div class=\"bg\"></div>");
+            }
+            out.println("<script src=\"https://code.jquery.com/jquery-3.2.1.min.js\"></script>");
+            out.println("<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"></script>");
+            out.println("<script src=\"js/custom.js\" type=\"text/javascript\"></script>");
             out.println("</body>");
             out.println("</html>");
         }

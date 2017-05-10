@@ -1,0 +1,402 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 09-may-2017, 23:25:31
+    Author     : Brian
+*/
+body{
+    background: url(../img/bg.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow-x: hidden;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333
+}
+.pushy-active{
+
+}
+.menu-btn{
+    display: block;
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    font-size: 21px;
+    color: #95C800;
+    width: 40px;
+    height: 40px;
+    padding: 4px 9px;
+    border-radius: 100px;
+    transition: 0.3s;
+    z-index: 99999999;
+}
+.menu-btn:hover {
+    display: block;
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    font-size: 21px;
+    color: #ffffff;
+    background: #97C900;
+    width: 40px;
+    cursor: pointer;
+    height: 40px;
+    padding: 4px 9px;
+    border-radius: 100px;
+    transition: 0.3s;
+}
+.pushy{
+    font-size: 1.0em;
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    top: 0;
+    z-index: 9999;
+    background: #242a33;
+    overflow: auto;
+    transition: transform .2s cubic-bezier(.16, .68, .43, .99);
+}
+.pushy-open {
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    -o-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0) !important;
+}
+#pushy-left{
+    transform: translate3d(-250px,0,0);
+}
+.pushy .profile {
+    background: #161C25;
+    margin: -40px 0px -50px;
+    padding: 40px 0px 50px;
+}
+.pushy .profile .avatar{
+    width: 110px;
+    background: #161C25;
+    height: 110px;
+    border-radius: 100px;
+    position: relative;
+    margin: 40px auto 0px;
+}
+.pushy .profile .avatar img {
+    width: 110px;
+    height: 110px;
+    border-radius: 100px;
+    display: block;
+    border: 2px solid #03AAAC;
+    padding: 6px;
+}
+.pushy .profile .avatar span {
+    display: block;
+    position: absolute;
+    right: 0px;
+    padding: 5px 11px;
+    background: #03AAAC;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    color: #FFFFFF;
+    font-weight: 500;
+    top: 80px;
+}
+.pushy .profile h3 {
+    text-align: center;
+}
+.pushy .profile h3 a {
+    font-weight: 300;
+    font-size: 20px;
+    color: #FFFFFF;
+}
+.pushy .profile h3 a:hover {
+    color: #03AAAC;
+    text-decoration: none;
+}
+a {
+    color: #97C900;
+    text-decoration: none;
+    transition: 0.3s;
+}
+a:hover {
+    color: #333;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.pushy .profile .log_btn {
+    width: 100px;
+    display: block;
+    border: 2px solid #FFFFFF;
+    text-align: center;
+    padding: 8px;
+    border-radius: 3px;
+    margin: 20px auto;
+    color: #FFFFFF;
+}
+.pushy .profile .log_btn:hover {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    text-decoration: none;
+}
+.pushy .side_menu {
+    margin: 50px 0px;
+    padding: 0px;
+}
+.pushy .side_menu li {
+    display: block;
+    list-style: none;
+    margin-bottom: 0px;
+}
+.pushy .side_menu li a {
+    color: #63737C;
+    display: block;
+    border-top: 1px solid #161C25;
+    border-bottom: 1px solid #161C25;
+    margin-bottom: -1px;
+}
+.pushy .side_menu li a:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+    background: #03AAAC;
+}
+.pushy .side_menu li a i {
+    color: #03aaac;
+    padding: 12px;
+    display: inline-block;
+    background: #161C25;
+    margin-right: 16px;
+    font-size: 14px;
+    transition: 0.3s;
+    min-width: 40px;
+    text-align: center;
+}
+.contant .basic {
+    background: #ffffff;
+    min-height: 100%;
+    padding: 0px;
+    position: relative;
+    padding-bottom: 40px;
+}
+.head {
+    background: #ffffff;
+    padding: 20px 30px 30px;
+}
+.more_btn {
+    padding: 10px 20px;
+    display: block;
+    width: 150px;
+    text-align: center;
+    border: 2px solid #CBCBCB;
+    margin: 30px auto;
+    border-radius: 3px;
+    color: #CBCBCB;
+    clear: both;
+}
+.more_btn:hover {
+    text-decoration: none;
+    background: #95C800;
+    border-color: #95C800;
+    color: #ffffff;
+}
+.head .logo h1{
+    color: #161C25;
+    font-size: 33px;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-family: 'Roboto', sans-serif;
+    display: inline-block;
+    margin: 0;
+}
+.head .logo:hover{
+    text-decoration: none;
+}
+.head .green_btn_header, .head .green_btn_header:hover {
+    max-width: 40px;
+    padding: 6px 0;
+    text-align: center;
+    margin: 0;
+}
+.green_btn_header {
+    background: #95c800;
+    padding: 6px 50px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 4px;
+    display: inline-block;
+    width: 180px;
+    text-align: center;
+    float: right;
+    margin: 28px;
+    transition: .3s;
+}
+.green_btn_header:hover {
+    background: #353535;
+    padding: 6px 50px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 4px;
+    display: block;
+    width: 180px;
+    text-align: center;
+    float: right;
+    margin: 28px;
+    text-decoration: none;
+    transition: .3s;
+}
+/* NEW CONTACT WINDOW */
+.add_place {
+    position: fixed;
+    z-index: 999;
+    background: rgba(0,0,0,.83);
+    width: 100%;
+    height: 100%;
+    top: -150%;
+    transition: .3s linear;
+}
+.place_form {
+    width: 550px;
+    background: #fff;
+    border-radius: 4px;
+    margin: 0 auto;
+    top: 50%;
+    position: relative;
+    height: 480px;
+    margin-top: -265px;
+}
+.close_window {
+    display: block;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    color: #fff;
+    cursor: pointer;
+}
+.place_form h3 {
+    font-weight: 300;
+    text-align: center;
+    padding: 20px 0;
+    display: block;
+}
+.place_form h3 span {
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: #95c800;
+    margin: 20px auto -16px auto;
+}
+.place_form label {
+    font-size: 11px;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 0 30px;
+    margin: 20px 0 20px 0;
+}
+.place_form label input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    background: #f9f9f9;
+    padding: 0 20px;
+    font-size: 16px;
+    font-weight: 300;
+}
+.place_form label input:focus {
+    outline: none;
+    border: 1px solid #7ccb18;
+    background: #fff;
+    color: #7ccb18;
+    font-size: 16px;
+    font-weight: 300;
+}
+.place_form button {
+    width: 100%;
+    margin: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding: 20px;
+    margin-top: 18px;
+}
+.place_form button:hover {
+    width: 100%;
+    margin: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding: 20px;
+    margin-top: 18px;
+}
+/* LISTA CONTACTOS */
+.contactos h4{
+    padding: 40px 30px 0 30px;
+    font-size: 16px;
+    margin: 0;
+}
+.contactos .contacto{
+    padding: 30px;
+    border-bottom: 1px solid #e4e4e4;
+    transition: .3s;
+}
+.contactos .contacto:hover {
+    background: #f9f9f9;
+    transition: .3s;
+}
+.contactos .contacto .user{
+    float: left;
+    margin: 0 20px 0 0;
+    padding-top: 4px;
+    overflow: hidden;
+}
+.user_avatars {
+    width: 45px;
+    height: 45px;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    top: -6px;
+}
+.user_avatars:hover .user_go {
+    bottom: 0;
+    transition: .3s;
+}
+.user_go {
+    position: absolute;
+    width: 45px;
+    background: rgba(151,201,0,.81);
+    height: 45px;
+    overflow: hidden;
+    padding: 13px 17px !important;
+    border-radius: 3px;
+    bottom: -65px;
+    transition: .3s;
+}
+.user_go i {
+    color: #fff;
+}
+.contactos .contacto .user img {
+    width: 45px;
+    border-radius: 3px;
+}
+.contactos .contacto .info{
+    padding-left: 65px;
+}
+.contactos .contacto .info a{
+    color: #97c900;
+    text-decoration: none;
+    transition: .3s;
+}
+.contactos .contacto .info a:hover{
+    color: #333;
+    text-decoration: none;
+    transition: .3s;
+}
+.contactos .contacto .head_contact span{
+    color: #b5b5b5;
+    font-size: 13px;
+    padding-left: 20px;
+}
