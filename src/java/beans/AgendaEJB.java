@@ -8,13 +8,9 @@ package beans;
 import entities.Usuario;
 import javax.ejb.Stateless;
 import entities.*;
-import static java.lang.System.out;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
-import servlets.Contacto;
 
 /**
  *
@@ -25,8 +21,16 @@ public class AgendaEJB {
 
     @PersistenceUnit
     EntityManagerFactory emf;
-    
-     public Usuario getUser(String nick){
+
+    public boolean existUser(Usuario u) {
+        EntityManager em = emf.createEntityManager();
+        Usuario usuario = em.find(Usuario.class, u.getNick());
+        em.close();
+        return usuario != null;
+    }
+
+    public Usuario getUser(String nick) {
+        emf.getCache().evictAll();
         return (Usuario) emf.createEntityManager().
                 createNamedQuery("Usuario.findByNick").
                 setParameter("nick", nick).getSingleResult();

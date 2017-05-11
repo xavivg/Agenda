@@ -105,9 +105,10 @@ public class Usuario implements Serializable {
         return true;
     }
 
+    
     @Override
     public String toString() {
-        return "entities.Usuario[ nick=" + nick + " ]";
+        return "entities.Usuario[ nick=" + nick + ", password="+ password +" ]";
     }
     
 }

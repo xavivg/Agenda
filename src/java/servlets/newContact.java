@@ -46,6 +46,7 @@ public class newContact extends HttpServlet {
             out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">");
             out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">");
             out.println("<link href=\"css/custom.css\" rel=\"stylesheet\" type=\"text/css\"/>");
+            out.println("<META http-equiv='refresh' content='3;URL=index.html'>");
             out.println("</head>");
             out.println("<body class=\"promo\">");
 
@@ -61,15 +62,14 @@ public class newContact extends HttpServlet {
 
             Usuario u = miEjb.getUser(nombre);
             Contactos c = new Contactos(Integer.SIZE, name, surname, mail, house, mobile, location, u);
+
             if (miEjb.insertarContacto(c)) {
+                u = miEjb.getUser(nombre);
+                request.getSession().setAttribute("usuario", u);
                 out.println("<div class=\"start_descrition option animated fadeInDownBig\">");
                 out.println("<h1>CONTACTO AÑADIDO<span></span></h1>");
-                out.println("<span>" + name + " ha sido agregado a la lista de contactos de " + nombre + ".</span>");
+                out.println("<span>" + name + " ha sido agregado a la lista de contactos de " + nombre + " redireccionando a la página principal...</span>");
                 out.println("<div class=\"btns\">");
-                out.println("<form action=\"login\" method=\"POST\">");
-                out.println("<input type=\"hidden\" name='nombre' value='" + nombre + "'>");
-                out.println("<input type=\"hidden\" name='password' value='" + password + "'>");
-                out.println("<button type=\"submit\" class=\"white_border\">ACEPTAR</button>");
                 out.println("</form>");
                 out.println("</div>");
                 out.println("</div>");
@@ -78,13 +78,8 @@ public class newContact extends HttpServlet {
                 out.println("<div class=\"start_descrition option animated fadeInDownBig\">");
                 out.println("<a href=\"#\" class=\"start_logo\"><h1>Error</h1></a>");
                 out.println("<h1>CONTACTO NO AÑADIDO<span></span></h1>");
-                out.println("<span>" + name + " no ha podido ser agregado a la lista de contactos de " + nombre + ".</span>");
+                out.println("<span>" + name + " no ha podido ser agregado a la lista de contactos de " + nombre + ", redireccionando a la página principal...</span>");
                 out.println("<div class=\"btns\">");
-                out.println("<form action=\"login\" method=\"POST\">");
-                out.println("<input type=\"hidden\" name='nombre' value='" + nombre + "'>");
-                out.println("<input type=\"hidden\" name='password' value='" + password + "'>");
-                out.println("<button type=\"submit\" class=\"white_border\">ACEPTAR</button>");
-                out.println("</form>");
                 out.println("</div>");
                 out.println("</div>");
                 out.println("<div class=\"bg\"></div>");
