@@ -12,6 +12,13 @@ $(function () {
     $('#closeau').click(function () {
         $('#autorized').animate({'top': '-999px'}, 500);
     });
+    $('#signup').click(function () {
+        $('#register').animate({'top': '0px'}, 200);
+        return false;
+    });
+    $('#closeform').click(function () {
+        $('#register').animate({'top': '-999px'}, 500);
+    });
     $('#addContact').click(function (){
         $('#pl').animate({'top':'0'}, 200);
         return false;

@@ -33,7 +33,7 @@
                 <h3>
                     <a href="#"><%=current.getNick()%></a>
                 </h3>
-                <a class="log_btn" href="index.html">Log Out</a>
+                <a class="log_btn" href="index.html">Salir</a>
             </div>
         </nav>
         <div class="add_place" id="pl">

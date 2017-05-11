@@ -18,16 +18,27 @@ and open the template in the editor.
             <a href="#" class="start_logo"><h1>Mi Agenda</h1></a>
             <h1>WEBAPP<span></span></h1>
             <span>Proyecto de Java utilizando base de datos y vista en web.</span>
-            <div class="btns"><a href="#" class="green">SIGN UP</a><a href="#" class="white_border" id="login">LOG IN</a></div>
+            <div class="btns"><a href="#" class="green" id="signup">Regístrate</a><a href="#" class="white_border" id="login">Inicia sesión</a></div>
         </div>
         <div class="add_place" id="autorized">
             <div class="place_form login_form">
                 <i class="fa fa-times close_window" id="closeau"></i>
-                <h3>Autorization<span></span></h3>
+                <h3>Login<span></span></h3>
                 <form action="userValidation" method='POST'>
-                    <label>Login:<input type="text" name="nombre"></label>
-                    <label>Password:<input type="password" name="password"></label>
-                    <input type="submit" class="btn btn-success login_input" value="Log in">
+                    <label>Usuario:<input type="text" name="nombre"></label>
+                    <label>Contraseña:<input type="password" name="password"></label>
+                    <input type="submit" class="btn btn-success login_input" value="Entrar">
+                </form>
+            </div>
+        </div>
+        <div class="add_place" id="register">
+            <div class="place_form login_form">
+                <i class="fa fa-times close_window" id="closeform"></i>
+                <h3>Sign Up<span></span></h3>
+                <form action="" method="POST">
+                    <label>Usuario:<input type="text" name="reg_name"></label>
+                    <label>Contraseña:<input type="password" name="reg_password"></label>
+                    <input type="submit" class="btn btn-success login_input" value="Registrate">
                 </form>
             </div>
         </div>
