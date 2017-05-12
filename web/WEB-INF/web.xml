@@ -24,6 +24,10 @@
         <servlet-name>userValidation</servlet-name>
         <servlet-class>servlets.userValidation</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>newUser</servlet-name>
+        <servlet-class>servlets.newUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SampleServlet</servlet-name>
         <url-pattern>/SampleServlet</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>userValidation</servlet-name>
         <url-pattern>/userValidation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>newUser</servlet-name>
+        <url-pattern>/newUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

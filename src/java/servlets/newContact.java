@@ -60,11 +60,11 @@ public class newContact extends HttpServlet {
             String nombre = request.getParameter("reg_user");
             String password = request.getParameter("reg_password");
 
-            Usuario u = miEjb.getUser(nombre);
+            Usuario u = miEjb.getUserByNick(nombre);
             Contactos c = new Contactos(Integer.SIZE, name, surname, mail, house, mobile, location, u);
 
-            if (miEjb.insertarContacto(c)) {
-                u = miEjb.getUser(nombre);
+            if (miEjb.insertContact(c)) {
+                u = miEjb.getUserByNick(nombre);
                 request.getSession().setAttribute("usuario", u);
                 out.println("<div class=\"start_descrition option animated fadeInDownBig\">");
                 out.println("<h1>CONTACTO AÑADIDO<span></span></h1>");

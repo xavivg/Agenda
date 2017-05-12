@@ -41,7 +41,7 @@ public class userValidation extends HttpServlet {
             String password = request.getParameter("password");
             // Verificamos si los datos son correctos con la bbdd
             // Si lo son, guardamos el user en variable de sesion
-            Usuario current = miEjb.existeUsuario(nombre, password);
+            Usuario current = miEjb.existUserByName(nombre, password);
             //request.getSession(true).setAttribute("nombre", nombre);
             //request.getSession(true).setAttribute("password", password);
             request.getSession(true).setAttribute("usuario", current);

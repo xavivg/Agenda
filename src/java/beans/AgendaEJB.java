@@ -22,34 +22,37 @@ public class AgendaEJB {
     @PersistenceUnit
     EntityManagerFactory emf;
 
-    public boolean existUser(Usuario u) {
+    public boolean existUserByObj(Usuario u) {
+        emf.getCache().evictAll();
         EntityManager em = emf.createEntityManager();
         Usuario usuario = em.find(Usuario.class, u.getNick());
         em.close();
         return usuario != null;
     }
 
-    public Usuario getUser(String nick) {
+    public Usuario getUserByNick(String nick) {
         emf.getCache().evictAll();
         return (Usuario) emf.createEntityManager().
                 createNamedQuery("Usuario.findByNick").
                 setParameter("nick", nick).getSingleResult();
     }
 
-    public Usuario existeUsuario(String nombre, String password) {
+    public Usuario existUserByName(String name, String password) {
+        emf.getCache().evictAll();
         EntityManager em = emf.createEntityManager();
-        Usuario encontrado = em.find(Usuario.class, nombre);
-        if (encontrado.getPassword().equals(password)) {
-            return encontrado;
+        Usuario found = em.find(Usuario.class, name);
+        if (found.getPassword().equals(password)) {
+            return found;
         }
         em.close();
         return null;
     }
 
-    public boolean insertarContacto(Contactos c) {
+    public boolean insertContact(Contactos c) {
+        emf.getCache().evictAll();
         EntityManager em = emf.createEntityManager();
-        Contactos contacto = em.find(Contactos.class, c.getId());
-        if (contacto == null) {
+        Contactos contact = em.find(Contactos.class, c.getId());
+        if (contact == null) {
             em.persist(c);
             em.flush();
             em.close();
@@ -58,39 +61,55 @@ public class AgendaEJB {
         return false;
     }
 
-    public Contactos existeContacto(int id, String nick) {
+    public Contactos existContactByIdNick(int id, String nick) {
+        emf.getCache().evictAll();
         EntityManager em = emf.createEntityManager();
-        Contactos encontrado = em.find(Contactos.class, id);
-        if (encontrado.getUsuarioNick().getNick().equals(nick)) {
-            return encontrado;
+        Contactos found = em.find(Contactos.class, id);
+        if (found.getUsuarioNick().getNick().equals(nick)) {
+            return found;
         }
         em.close();
         return null;
     }
 
-    public boolean deleteContacto(int id, String nick) {
+    public boolean deleteContact(int id, String nick) {
+        emf.getCache().evictAll();
         EntityManager em = emf.createEntityManager();
-        Contactos encontrado = em.find(Contactos.class, id);
-        if (encontrado.getUsuarioNick().getNick().equals(nick)) {
-            em.remove(encontrado);
+        Contactos found = em.find(Contactos.class, id);
+        if (found.getUsuarioNick().getNick().equals(nick)) {
+            em.remove(found);
             em.close();
             return true;
         }
         return false;
     }
 
-    public boolean updateContacto(Contactos c) {
+    public boolean updateContact(Contactos c) {
+        emf.getCache().evictAll();
         EntityManager em = emf.createEntityManager();
-        Contactos contacto = em.find(Contactos.class, c.getId());
-        if (contacto != null) {
-            contacto.setNombre(c.getNombre());
-            contacto.setApellidos(c.getApellidos());
-            contacto.setMail(c.getMail());
-            contacto.setTfijo(c.getTfijo());
-            contacto.setTmovil(c.getTmovil());
-            contacto.setDireccion(c.getDireccion());
-            contacto.setUsuarioNick(c.getUsuarioNick());
-            em.persist(contacto);
+        Contactos contact = em.find(Contactos.class, c.getId());
+        if (contact != null) {
+            contact.setNombre(c.getNombre());
+            contact.setApellidos(c.getApellidos());
+            contact.setMail(c.getMail());
+            contact.setTfijo(c.getTfijo());
+            contact.setTmovil(c.getTmovil());
+            contact.setDireccion(c.getDireccion());
+            contact.setUsuarioNick(c.getUsuarioNick());
+            em.persist(contact);
+            em.close();
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean createUser(String name, String password) {
+        emf.getCache().evictAll();
+        EntityManager em = emf.createEntityManager();
+        Usuario user = new Usuario(name, password);
+        if (!existUserByObj(user)) {
+            em.persist(user);
+            em.flush();
             em.close();
             return true;
         }

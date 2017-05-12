@@ -52,9 +52,9 @@ public class updateContact extends HttpServlet {
             out.println("<body>");
             
 
-            if(miEjb.existeUsuario(current, pass)!=null){
+            if(miEjb.existUserByName(current, pass)!=null){
                 
-            Usuario currentObj = miEjb.existeUsuario(current, pass);
+            Usuario currentObj = miEjb.existUserByName(current, pass);
             
             int id = Integer.parseInt(request.getParameter("id"));
             String name = request.getParameter("nombre");
@@ -67,9 +67,11 @@ public class updateContact extends HttpServlet {
             
             
             Contactos contacto = new Contactos(id,name, surname, mail, tfijo, tmovil, direccion, currentObj);
-           if(miEjb.updateContacto(contacto)){
+           if(miEjb.updateContact(contacto)){
+              currentObj = miEjb.getUserByNick(current);
+                request.getSession().setAttribute("usuario", currentObj);
                 out.println("<h3>La informacion de "+name+" ha sido actualizada correctamente</h3>");
-                out.println("<form action='login' method='POST'>");
+                out.println("<form action='myprofile.jsp' method='POST'>");
                 out.println("<input type='hidden' name='nombre' value='"+ current +"'>");
                 out.println("<input type='hidden' name='password' value='"+ pass +"'>");
                 out.println("<input type='submit' value='Entrar'>");
