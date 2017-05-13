@@ -33,7 +33,7 @@
                 <h3>
                     <a href="#"><%=current.getNick()%></a>
                 </h3>
-                <a class="log_btn" href="index.html">Salir</a>
+                <a class="log_btn" href="logout">Salir</a>
             </div>
         </nav>
         <div class="add_place" id="pl">
@@ -70,17 +70,28 @@
                         %>
                         <div class="contacto">
                             <div class="user">
-                                <a class="user_avatars" href="Contacto?id=<%=contacto.getId()%>&current=<%=current.getNick()%>">
-                                    <div class="user_go">
-                                        <i class="fa fa-link"></i>
-                                    </div>
-                                    <img src="img/no-profile.jpg" alt=""/>
-                                </a>
+                                <form action="getContact" method="POST">
+                                    <a class="user_avatars" href="javascript:;" onclick="parentNode.submit();">
+                                        <div class="user_go">
+                                            <i class="fa fa-link"></i>
+                                        </div>
+                                        <img src="img/no-profile.jpg" alt=""/>
+                                    </a>
+                                    <input type="hidden" name="id" value="<%=contacto.getId()%>">
+                                    <input type="hidden" name="current" value="<%=current.getNick()%>"
+                                    <input type="hidden" name="password" value="<%=current.getPassword()%>">
+                                </form>
                             </div>
                             <div class="info">
                                 <div class="head_contact">
-                                    <a href="Contacto?id=<%=contacto.getId()%>&current=<%=current.getNick()%>"><%=contacto.getNombre()%> <%=contacto.getApellidos()%></a>
-                                    <span><%=contacto.getTmovil()%></span>
+                                    <form action="getContact" method="POST">
+                                        <a href="javascript:;" onclick="parentNode.submit();"><%=contacto.getNombre()%> <%=contacto.getApellidos()%></a>
+                                        <span><%=contacto.getTmovil()%></span>                                      
+                                        <input type="hidden" name="id" value="<%=contacto.getId()%>">
+                                        <input type="hidden" name="current" value="<%=current.getNick()%>">
+                                        <input type="hidden" name="password" value="<%=current.getPassword()%>">
+                                    </form>
+
                                 </div>
                             </div>
                         </div>

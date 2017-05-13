@@ -18,11 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author xaviv
+ * @author Brian
  */
-public class updateContact extends HttpServlet {
-  @EJB
+public class getContact extends HttpServlet {
+
+    @EJB
     AgendaEJB miEjb;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,48 +38,20 @@ public class updateContact extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            String current = request.getParameter("current");
-            String pass = request.getParameter("password");
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>updateContact</title>");    
-            out.println("<script src=\"https://code.jquery.com/jquery-3.2.1.min.js\"></script>");
-            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">");
-            out.println("<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"></script>");
-            out.println("<script> function myFunction(){ window.location.href = \"login.html\";}</script>");
-            
-            out.println("</head>");
-            out.println("<body>");
-            
-
-            if(miEjb.existUserByName(current, pass)!=null){
-                
-            Usuario currentObj = miEjb.existUserByName(current, pass);
-            
-            int id = Integer.parseInt(request.getParameter("reg_id"));
-            String name = request.getParameter("reg_name");
-            String surname = request.getParameter("reg_surname");
-            String mail = request.getParameter("reg_mail");
-            String tfijo = request.getParameter("reg_house");
-            String tmovil = request.getParameter("reg_mobile");
-            String direccion = request.getParameter("reg_location");
-            
-            
-            
-            Contactos contacto = new Contactos(id,name, surname, mail, tfijo, tmovil, direccion, currentObj);
-            
-           if(miEjb.updateContact(contacto)){
-              currentObj = miEjb.getUserByNick(current);
-                request.getSession().setAttribute("usuario", currentObj);
-                request.getSession().setAttribute("contacto", contacto);
-                response.sendRedirect(request.getContextPath() + "/contact.jsp");
-           }
-            out.println("</body>");
-            out.println("</html>");
+            int id = Integer.parseInt(request.getParameter("id"));
+            String nombre = request.getParameter("current");
+            String password = request.getParameter("password");
+            // Verificamos si los datos son correctos con la bbdd
+            // Si lo son, guardamos el user en variable de sesion
+            miEjb.existContactByIdNick(id, nombre);
+            Contactos contacto = miEjb.existContactByIdNick(id, nombre);
+            Usuario current = miEjb.existUserByName(nombre, password);
+            //request.getSession(true).setAttribute("nombre", nombre);
+            //request.getSession(true).setAttribute("password", password);
+            request.getSession(true).setAttribute("contacto", contacto);
+            request.getSession(true).setAttribute("usuario", current);
+            response.sendRedirect(request.getContextPath() + "/contact.jsp");
         }
-    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -120,3 +94,4 @@ public class updateContact extends HttpServlet {
     }// </editor-fold>
 
 }
+

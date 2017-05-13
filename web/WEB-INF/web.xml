@@ -28,6 +28,14 @@
         <servlet-name>newUser</servlet-name>
         <servlet-class>servlets.newUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>servlets.logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getContact</servlet-name>
+        <servlet-class>servlets.getContact</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SampleServlet</servlet-name>
         <url-pattern>/SampleServlet</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>newUser</servlet-name>
         <url-pattern>/newUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getContact</servlet-name>
+        <url-pattern>/getContact</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
