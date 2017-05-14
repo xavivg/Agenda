@@ -67,10 +67,13 @@
                     </div>
                     <div class="place_form_contact">
                         <input type="hidden" name="reg_id" value="<%=contacto.getId()%>" form="updateForm">
-                        <input type="hidden" name="reg_id" value="<%=contacto.getId()%>" form="deleteContact">
+                        <input type="hidden" name="reg_id" value="<%=contacto.getId()%>" form="deleteForm">
                         <input type="hidden" name="current" value="<%=current.getNick()%>" form="updateForm">
                         <input type="hidden" name="password" value="<%=current.getPassword()%>" form="updateForm">
+                        <input type="hidden" name="current" value="<%=current.getNick()%>" form="deleteForm">
+                        <input type="hidden" name="password" value="<%=current.getPassword()%>" form="deleteForm">
                         <label>Nombre:<input type="text" value="<%=contacto.getNombre()%>" name="reg_name" placeholder="<%=contacto.getNombre()%>" form="updateForm"></label>
+                        <input type="hidden" value="<%=contacto.getNombre()%>" name="reg_name" placeholder="<%=contacto.getNombre()%>" form="deleteForm">
                         <label>Apellido:<input type="text" value="<%=contacto.getApellidos()%>" name="reg_surname" placeholder="<%=contacto.getApellidos()%>" form="updateForm"></label>
                         <label>Mail:<input type="text" value="<%=contacto.getMail()%>" name="reg_mail" placeholder="<%=contacto.getMail()%>" form="updateForm"></label>
                         <label>Móvil:<input type="text" value="<%=contacto.getTmovil()%>" name="reg_mobile" placeholder="<%=contacto.getTmovil()%>" form="updateForm"></label>
