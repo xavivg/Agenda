@@ -72,16 +72,13 @@ public class AgendaEJB {
         return null;
     }
 
-    public boolean deleteContact(int id, String nick) {
+    public boolean deleteContact(int id) {
         emf.getCache().evictAll();
         EntityManager em = emf.createEntityManager();
         Contactos found = em.find(Contactos.class, id);
-        if (found.getUsuarioNick().getNick().equals(nick)) {
-            em.remove(found);
-            em.close();
-            return true;
-        }
-        return false;
+        em.remove(found);
+        em.close();
+        return true;
     }
 
     public boolean updateContact(Contactos c) {

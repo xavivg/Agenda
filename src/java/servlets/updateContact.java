@@ -21,8 +21,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author xaviv
  */
 public class updateContact extends HttpServlet {
-  @EJB
+
+    @EJB
     AgendaEJB miEjb;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,42 +44,39 @@ public class updateContact extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>updateContact</title>");    
+            out.println("<title>updateContact</title>");
             out.println("<script src=\"https://code.jquery.com/jquery-3.2.1.min.js\"></script>");
             out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">");
             out.println("<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"></script>");
             out.println("<script> function myFunction(){ window.location.href = \"login.html\";}</script>");
-            
+
             out.println("</head>");
             out.println("<body>");
-            
 
-            if(miEjb.existUserByName(current, pass)!=null){
-                
-            Usuario currentObj = miEjb.existUserByName(current, pass);
-            
-            int id = Integer.parseInt(request.getParameter("reg_id"));
-            String name = request.getParameter("reg_name");
-            String surname = request.getParameter("reg_surname");
-            String mail = request.getParameter("reg_mail");
-            String tfijo = request.getParameter("reg_house");
-            String tmovil = request.getParameter("reg_mobile");
-            String direccion = request.getParameter("reg_location");
-            
-            
-            
-            Contactos contacto = new Contactos(id,name, surname, mail, tfijo, tmovil, direccion, currentObj);
-            
-           if(miEjb.updateContact(contacto)){
-              currentObj = miEjb.getUserByNick(current);
-                request.getSession().setAttribute("usuario", currentObj);
-                request.getSession().setAttribute("contacto", contacto);
-                response.sendRedirect(request.getContextPath() + "/contact.jsp");
-           }
-            out.println("</body>");
-            out.println("</html>");
+            if (miEjb.existUserByName(current, pass) != null) {
+
+                Usuario currentObj = miEjb.existUserByName(current, pass);
+
+                int id = Integer.parseInt(request.getParameter("reg_id"));
+                String name = request.getParameter("reg_name");
+                String surname = request.getParameter("reg_surname");
+                String mail = request.getParameter("reg_mail");
+                String tfijo = request.getParameter("reg_house");
+                String tmovil = request.getParameter("reg_mobile");
+                String direccion = request.getParameter("reg_location");
+
+                Contactos contacto = new Contactos(id, name, surname, mail, tfijo, tmovil, direccion, currentObj);
+
+                if (miEjb.updateContact(contacto)) {
+                    currentObj = miEjb.getUserByNick(current);
+                    request.getSession().setAttribute("usuario", currentObj);
+                    request.getSession().setAttribute("contacto", contacto);
+                    response.sendRedirect(request.getContextPath() + "/contact.jsp");
+                }
+                out.println("</body>");
+                out.println("</html>");
+            }
         }
-    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

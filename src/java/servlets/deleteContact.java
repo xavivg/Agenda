@@ -6,6 +6,7 @@
 package servlets;
 
 import beans.AgendaEJB;
+import entities.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -19,8 +20,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author xaviv
  */
 public class deleteContact extends HttpServlet {
-  @EJB
+
+    @EJB
     AgendaEJB miEjb;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,28 +41,38 @@ public class deleteContact extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet deleteContact</title>");     
+            out.println("<title>Servlet deleteContact</title>");
             out.println("<script src=\"https://code.jquery.com/jquery-3.2.1.min.js\"></script>");
             out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">");
             out.println("<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"></script>");
             out.println("<script> function myFunction(){ window.location.href = \"login.html\"; }</script>");
             out.println("</head>");
             out.println("<body>");
-             int id = Integer.parseInt(request.getParameter("id"));
-             String current = request.getParameter("current");
-             String pass = request.getParameter("password");
-             String name = request.getParameter("nombre");
-           
-            if(miEjb.deleteContact(id, current)){
-                out.println("<h3>"+name+" ha sido eliminado de tu lista de contactos</h3>");
-                out.println("<script>setTimeout(myFunction, 3000)</script>");
+
+            String current = request.getParameter("current");
+            String pass = request.getParameter("password");
+
+            if (miEjb.existUserByName(current, pass) != null) {
+
+                Usuario currentObj = miEjb.existUserByName(current, pass);
+
+                int id = Integer.parseInt(request.getParameter("reg_id"));
+
+                String name = request.getParameter("reg_name");
+
+                if (miEjb.deleteContact(id)) {
+                    currentObj = miEjb.getUserByNick(current);
+                    out.println("<h3>" + name + " ha sido eliminado de tu lista de contactos</h3>");
+                    out.println("<script>setTimeout(myFunction, 3000)</script>");
+                    request.getSession().setAttribute("usuario", currentObj);
+                    response.sendRedirect(request.getContextPath() + "/myprofile.jsp");
+                } else {
+                    out.println("<h2>Something went wrong!</h2>");
+                }
+
+                out.println("</body>");
+                out.println("</html>");
             }
-            else{
-                  out.println("<h2>Something went wrong!</h2>");
-            }
-               
-            out.println("</body>");
-            out.println("</html>");
         }
     }
 
